@@ -17,11 +17,12 @@ def get_largest_number(digits: str, no_digits: int) -> str:
     for i, digit in enumerate(digits):
         remaining = n - i
         # Only remove if we'll still have enough digits to reach length k
+        # After popping: len(stack) + remaining >= no_digits (we need at least no_digits total)
         while (
             len(stack) > 0
             and stack[-1] < digit
             and to_remove > 0
-            and len(stack) - 1 + remaining > no_digits  # Do we have enough digits to reach out target length (aka. no_digits)
+            and len(stack) + remaining >= no_digits
         ):
             stack.pop()
             to_remove -= 1
@@ -40,7 +41,7 @@ def main():
         sum = 0
         for line in file:
             print(line)
-            a = get_largest_number(line, 12)
+            a = get_largest_number(line.strip(), 12)
             print(a)
             sum += int(a)
 
