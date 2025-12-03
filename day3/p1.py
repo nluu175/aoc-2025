@@ -7,6 +7,10 @@
 # - Order has to be maintained
 # - The idea is we add everything to a stack (since order is always maintained)
 # then pop the stack when we reach a satisfying condition
+# - Monotonic Stack might be a choice here
+# Some observations
+# - We want larger digits in earlier positions (aka left most) -> So greedy is a choice here
+# - This leads to having a stack and keep adding numbers to it and only remove if we find a larger digit
 
 
 def get_largest_number(digits: str, no_digits: int) -> str:
@@ -18,17 +22,19 @@ def get_largest_number(digits: str, no_digits: int) -> str:
         remaining = n - i
         # Only remove if we'll still have enough digits to reach length k
         # After popping: len(stack) + remaining >= no_digits (we need at least no_digits total)
+        # This can be understood as: last digit to the right in the stack is smaller than current processed digit
+        # AND we can afford to remove
         while (
             len(stack) > 0
             and stack[-1] < digit
             and to_remove > 0
-            and len(stack) + remaining >= no_digits
+            and len(stack) + remaining >= no_digits  # Do we have enough digits to reach out target length (aka. no_digits)
         ):
             stack.pop()
             to_remove -= 1
         stack.append(digit)
 
-    # If we haven't removed enough, remove from end
+    # If we haven't removed enough, remove from end. This is to achieve length no_digits
     while to_remove > 0:
         stack.pop()
         to_remove -= 1
