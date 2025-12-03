@@ -19,22 +19,16 @@ def get_largest_number(digits: str, no_digits: int) -> str:
     stack = []
 
     for i, digit in enumerate(digits):
-        remaining = n - i
         # Only remove if we'll still have enough digits to reach length k
-        # After popping: len(stack) + remaining >= no_digits (we need at least no_digits total)
         # This can be understood as: last digit to the right in the stack is smaller than current processed digit
-        # AND we can afford to remove
-        while (
-            len(stack) > 0
-            and stack[-1] < digit
-            and to_remove > 0
-            and len(stack) + remaining >= no_digits  # Do we have enough digits to reach out target length (aka. no_digits)
-        ):
+        # AND we can afford to remove (aka. to_remove must be larger than 0 still)
+        while stack and stack[-1] < digit and to_remove > 0:
             stack.pop()
             to_remove -= 1
         stack.append(digit)
 
-    # If we haven't removed enough, remove from end. This is to achieve length no_digits
+    # If we haven't removed enough, remove from end.
+    # This is to achieve length of no_digits
     while to_remove > 0:
         stack.pop()
         to_remove -= 1
