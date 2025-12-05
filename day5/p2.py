@@ -17,6 +17,7 @@ def main():
     ranges.sort()
     merged = []
     for start, end in ranges:
+        # since ranges is sorted, we check the last range and see if they overlap
         if merged and start <= merged[-1][1] + 1:
             merged[-1] = (merged[-1][0], max(merged[-1][1], end))
         else:
