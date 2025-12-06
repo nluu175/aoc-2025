@@ -1,9 +1,10 @@
 # Some observations
 # - Index of digit now matters since we cant treat the whole number as a column
-# - White Space, White Space, 4 is treated as number 4 -> thus max width of all rows should be used as a width so that we dont miss any digitsa
+# - White Space, White Space, 4 is treated as number 4 -> thus max width of all rows should be used as a width so that we dont miss any digits
 # - Operator col index is the end boundary of the whole operation. This is the most reliable way to mark the end of the operation
 # - I missed the operator index and was trying to split the operations based on the higher rows (number)
 # - Taking Transpose of the matrix might be doable for this problem too. Will try later.
+# - It doesn't really matter if we do it RIGHT TO LEFT or LEFT TO RIGHT (this part is confusing) since we treat each digit as its own entry and we only do (+) and (*) within each eperation group
 
 def main():
     with open("input.txt", "r") as file:
@@ -39,8 +40,9 @@ def main():
 
         accumulator = 1 if current_row_operator == '*' else 0
 
-        # process columns RIGHT-TO-LEFT within this operation
-        for col in range(operator_index + op_width - 1, operator_index - 1, -1):
+        # process columns LEFT-TO-RIGHT within this operation
+        # for col in range(operator_index + op_width - 1, operator_index - 1, -1):
+        for col in range(operator_index, operator_index + op_width):
             # build the number from TOP-TO-BOTTOM in this column
             num = 0
             for row in range(height - 1):
