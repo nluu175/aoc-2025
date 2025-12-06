@@ -3,6 +3,7 @@
 # - White Space, White Space, 4 is treated as number 4 -> thus max width of all rows should be used as a width so that we dont miss any digitsa
 # - Operator col index is the end boundary of the whole operation. This is the most reliable way to mark the end of the operation
 # - I missed the operator index and was trying to split the operations based on the higher rows (number)
+# - Taking Transpose of the matrix might be doable for this problem too. Will try later.
 
 def main():
     with open("input.txt", "r") as file:

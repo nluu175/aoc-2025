@@ -1,3 +1,6 @@
+# TODO:
+# - Try this with Interval Tree, Sweep Line Algorithm,  Union-Find and Bit Array
+
 def main():
     ranges = []
 
