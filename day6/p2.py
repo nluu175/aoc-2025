@@ -3,12 +3,16 @@
 # - White Space, White Space, 4 is treated as number 4 -> thus max width of all rows should be used as a width so that we dont miss any digits
 # - Operator col index is the end boundary of the whole operation. This is the most reliable way to mark the end of the operation
 # - I missed the operator index and was trying to split the operations based on the higher rows (number)
-# - Taking Transpose of the matrix might be doable for this problem too. Will try later.
+# - Taking Transpose of the matrix might be doable for this problem too. Will try later. (https://github.com/Fadi88/AoC/blob/master/2025/days/day06/solution.py) found this one on reddit
 # - It doesn't really matter if we do it RIGHT TO LEFT or LEFT TO RIGHT (this part is confusing) since we treat each digit as its own entry and we only do (+) and (*) within each eperation group
+
+import time
 
 def main():
     with open("input.txt", "r") as file:
         lines = [line.rstrip('\n') for line in file.readlines()]
+
+    start = time.perf_counter()
 
     grid = [list(line) for line in lines]
 
@@ -60,6 +64,11 @@ def main():
 
         operator_index += op_width + 1
 
+    end = time.perf_counter()
+
     print(f"Grand Total: {total}")
+
+    duration = end - start
+    print(f"Time: {duration * 1_000_000:.2f} us")
 
 main()
