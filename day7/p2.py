@@ -1,8 +1,12 @@
-# I tried to solve it by computing the permutation at the end but it didnt work
-# Thought DP might work here.
-# Instead of tracking WHAT the paths are, track HOW MANY paths there are
+# - I tried to solve it by computing the permutation at the end but it didnt work
+# - I was think of a similar problem
+# - Let's say we have to construct a 3 digit number: ABC.
+# - Where there are 3 options for A, 5 options for B, 6 options for C (for example). The total of ways is 3 * 5 * 6.
+# - The main difference with this problem is choices (from above problem) are independent while they are depepdent from
+# previous step in this problem.
+# - Thought DP might work here. Instead of tracking WHAT the paths are, track HOW MANY paths there are
 # And we can do that by recording the amounts at each step.
-# I need to get better at DP ._.
+# - I need to get better at DP ._. >_<
 
 def main():
     matrix = []
