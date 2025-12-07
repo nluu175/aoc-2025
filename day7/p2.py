@@ -24,8 +24,12 @@ def main():
                 if matrix[row_i][col] == "^":
                     left_col = col - 1
                     right_col = col + 1
-                    next_paths[left_col] = next_paths.get(left_col, 0) + count
-                    next_paths[right_col] = next_paths.get(right_col, 0) + count
+
+                    # Only add if within bounds
+                    if left_col >= 0:
+                        next_paths[left_col] = next_paths.get(left_col, 0) + count
+                    if right_col < width:
+                        next_paths[right_col] = next_paths.get(right_col, 0) + count
                 else:
                     next_paths[col] = next_paths.get(col, 0) + count
 
